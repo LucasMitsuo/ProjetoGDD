@@ -1,8 +1,4 @@
-﻿using System.Configuration;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using MongoDB.Driver;
+﻿using MongoDB.Driver;
 using System;
 
 namespace ProjetoGDD.Models
