@@ -11,7 +11,7 @@ namespace ProjetoGDD.Models
     {
         private readonly String connectionString = "mongodb://localhost";
         private readonly String DataBaseName = "projetogdd";
-        public MongoDatabase Database;
+        private readonly MongoDatabase Database;
 
         public ReportesDB()
         {
