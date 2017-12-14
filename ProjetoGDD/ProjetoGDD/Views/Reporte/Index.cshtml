@@ -1,0 +1,120 @@
+﻿@model Tuple<IEnumerable<Reporte>, Reporte, int>
+
+@{
+    ViewBag.Title = "Lista | Projeto GDD";
+}
+
+<div class="row">
+    <h2 class="col-md-6">Lista</h2>
+
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-zap btn-home-novo pull-right" data-toggle="modal" data-target="#myModal">
+        Novo
+    </button>
+
+</div>
+
+@if (TempData["SucessoReporte"] != null)
+{
+    <div class="row">
+        <div class="alert alert-success alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert">
+                <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+            </button>
+            <span class="glyphicon glyphicon-floppy-saved"></span>
+            <strong>Reporte cadastrado com sucesso !!</strong>
+        </div>
+    </div>
+}
+
+@if (TempData["SucessoResposta"] != null)
+{
+    <div class="row">
+        <div class="alert alert-success alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert">
+                <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+            </button>
+            <span class="glyphicon glyphicon-floppy-saved"></span>
+            <strong>Sua resposta foi salva com sucesso !!</strong>
+        </div>
+    </div>
+}
+
+@if (TempData["SucessoExclusao"] != null)
+{
+    <div class="row">
+        <div class="alert alert-success alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert">
+                <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+            </button>
+            <span class="glyphicon glyphicon-floppy-saved"></span>
+            <strong>Reporte excluído com sucesso !!</strong>
+        </div>
+    </div>
+}
+
+
+<table class="table">
+    <tr class="fundo-azul">
+        <th class="text-center col-md-4">
+            @Html.DisplayNameFor(model => model.Item2.Descricao)
+        </th>
+        <th class="text-center col-md-2">
+            @Html.DisplayNameFor(model => model.Item2.DataCriacao)
+        </th>
+        <th class="text-center col-md-1">
+            Respostas
+        </th>
+        <th class="text-center col-md-3">
+            Ações
+        </th>
+    </tr>
+
+    @{
+        foreach (var reporte in Model.Item1)
+        {     
+            var QdtRespostas = reporte.Respostas == null ? 0 : reporte.Respostas.Count;
+
+            <tr>
+                <td class="text-center col-md-4">
+                    @Html.DisplayFor(modelItem => reporte.Descricao)
+                </td>
+                <td class="text-center col-md-2">
+                    @Html.DisplayFor(modelItem => reporte.DataCriacao)
+                </td>
+                <td class="text-center col-md-1">
+                    @QdtRespostas / @Model.Item3
+                </td>
+                <td class="text-center col-md-3">
+                    @Html.ActionLink("Responder", "FormResposta", new { idReporte = reporte.Id }) |
+                    @Html.ActionLink("Ver Respostas", "ListaRespostas", new { idReporte = reporte.Id }) |
+                    @Html.ActionLink("Excluir", "Excluir", new { idReporte = reporte.Id })
+                </td>
+            </tr>
+        }
+    }
+
+</table>
+<hr />
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Informe a descrição do novo reporte</h4>
+            </div>
+            @using (Html.BeginForm("Criar", "Reporte", new { }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                <div class="modal-body">                   
+                        @Html.TextBox("Descricao",string.Empty, new { @class = "form-control form-input", placeholder = "Ex: Reporte Semanal 12/12/2017"})
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-zap">Criar</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>

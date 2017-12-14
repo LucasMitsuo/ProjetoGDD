@@ -1,0 +1,73 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.btn-zap {
+    background-color: #ff5a00;
+    border-color: #ff5a00;
+    color: white;
+}
+
+.btn-home-novo {
+    height: 40px;
+    width: 65px;
+    font-size: medium;
+    margin-right:15px;
+    margin-top:10px
+}
+
+.btn-zap:hover{
+    opacity:0.8;
+    color:white;
+}
+
+.modal-footer{
+    margin-top:0px;
+}
+
+.alert-success{
+    margin-right:15px;
+    margin-left:15px;
+}
+
+.form-input{
+    max-width: 100%;
+}
+
+.img-zapinho {
+    opacity: 0.3;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    z-index: -1
+}
+
+.fundo-azul {
+    background-color: #007aa5;
+    color: white;
+}
+
+.panel-info-respostas{
+    margin-top:20px;
+}

@@ -1,0 +1,54 @@
+﻿@model Reporte
+@{
+    ViewBag.Title = "Lista de Respostas | Projeto GDD";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var QtdRespostas = Model.Respostas.Count == 0 || Model.Respostas == null ? "0" : Model.Respostas.Count.ToString();
+}
+<h2>@Model.Descricao</h2>
+<div class="panel panel-default panel-info-respostas">
+    <div class="panel-body">
+        <p><strong>Repostas:</strong> @QtdRespostas</p>
+        <p><strong>Faltam:</strong> @Model.MembrosRestantes.Item1</p>
+    </div>
+</div>
+
+<p>Clique no nome dos membros da equipe para visualizar as respostas</p>
+
+<hr />
+@foreach(var resposta in Model.Respostas)
+{
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        <div class="panel panel-default">
+            <a role="button" data-toggle="collapse" href="#@resposta.Nome.Replace(" ","")" aria-controls="collapseOne" style="color:white">
+                <div class="panel-heading fundo-azul" role="tab" id="headingOne">
+                    <h4 class="panel-title">
+                        @resposta.Nome
+                    </h4>
+                </div>
+            </a>
+            <div id="@resposta.Nome.Replace(" ","")" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                <div class="panel-body">
+                    @if (resposta.Atv_Passada != null)
+                    {
+                        <p><strong>Atividade Passada: </strong>@resposta.Atv_Passada</p>
+                    }
+                    @if (resposta.Atv_Presente != null)
+                    {
+                        <p><strong>Atividade Atual: </strong>@resposta.Atv_Presente</p>
+                    }
+                    @if (resposta.Atv_Futura != null)
+                    {
+                        <p><strong>Atividade Futura: </strong>@resposta.Atv_Futura</p>
+                    }
+                    @if (resposta.Impedimento != null)
+                    {
+                        <p><strong>Impedimentos: </strong>@resposta.Impedimento</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<hr />
+@Html.ActionLink("Voltar", "Index", new { }, new { @class = "btn btn-default" })
+@Html.ActionLink("Responder", "FormResposta", new { idReporte = Model.Id },new { @class = "btn btn-zap" })

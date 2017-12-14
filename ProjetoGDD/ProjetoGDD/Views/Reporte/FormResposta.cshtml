@@ -1,0 +1,66 @@
+﻿@model Tuple<Resposta,Reporte, List<SelectListItem>>
+
+@{
+    ViewBag.Title = "Formulário de Reporte | Projeto GDD";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model.Item2.Descricao</h2>
+<p>Preencha o formulário abaixo relatando suas atividades e aplicações nas quais trabalhou, está trabalhando e irá trabalhar.</p>
+
+@using (Html.BeginForm("Responder","Reporte", new { idReporte = Model.Item2.Id }, FormMethod.Post, new { @class = "form-horizontal", role = "form" })) 
+{    
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Item1.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*@Html.EditorFor(model => model.Item1.Nome, new { htmlAttributes = new { @class = "form-control" } })*@
+                @Html.DropDownListFor(model => model.Item1.Nome, Model.Item3,"Selecione um membro da equipe", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Item1.Nome, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Item1.Atv_Passada, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Item1.Atv_Passada, new { htmlAttributes = new { @class = "form-control form-input"} })
+                @Html.ValidationMessageFor(model => model.Item1.Atv_Passada, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Item1.Atv_Presente, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Item1.Atv_Presente, new { htmlAttributes = new { @class = "form-control form-input" } })
+                @Html.ValidationMessageFor(model => model.Item1.Atv_Presente, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Item1.Atv_Futura, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Item1.Atv_Futura, new { htmlAttributes = new { @class = "form-control form-input" } })
+                @Html.ValidationMessageFor(model => model.Item1.Atv_Futura, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Item1.Impedimento, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Item1.Impedimento, new { htmlAttributes = new { @class = "form-control form-input" } })
+                @Html.ValidationMessageFor(model => model.Item1.Impedimento, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                @Html.ActionLink("Cancelar", "Index", new { }, new { @class = "btn btn-default" })
+                <input type="submit" value="Salvar" class="btn btn-zap" />
+            </div>
+        </div>
+    </div>
+}
+
+
